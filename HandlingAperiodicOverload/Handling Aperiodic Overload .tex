@@ -1,0 +1,172 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Handling Aperiodic Overload\\
+{\footnotesize \textsuperscript}
+\thanks{Identify applicable funding agency here. If none, delete this.}
+}
+
+\author{\IEEEauthorblockN{1\textsuperscript{st} Brian Kelein Ngwoh Visas}
+\IEEEauthorblockA{\textit{Electronics Engineering} \\
+\textit{Hamm-Lippstadt University of Applied Sciences}\\
+Lippstadt, Germany \\
+brian-kelein-ngwoh.visas@stud.hshl.de}
+}
+\maketitle
+
+\begin{abstract}
+Text 
+\end{abstract}
+
+\begin{IEEEkeywords}
+component, formatting, style, styling, insert
+\end{IEEEkeywords}
+
+\section{Introduction}
+
+
+
+\subsection{Definitions}
+The way Systems are designed, most if not all require a modus operandi. In this forms of Operation they all have tasks they have to complete within a particular time to ensure, they function properly, this is also known as their Deadlines. So the main reason why some systems are called Real Time systems is because they are able to meet all the Deadlines, without missing out on any. According to  \cite{620484} therefore, in contrast to conventional computer systems where the
+goal usually is to minimize task response times, the emphasis here
+is on satisfying the timing constraints of tasks.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=8.5cm]{Example Over and Under load.png}
+    \cite{7515899}
+    \caption{Example for overloaded and underloaded}
+    \label{fig:reg-gen}
+\end{figure}
+
+
+
+\subsubsection{An Overloaded System}
+ Generally a system always has tasks to fulfill and this tasks has to be done within a period of time.When a system is not able to meet up with all the deadlines, this reduces its computing power and we refer to such a system as an Overloaded System.Also in due to Overload some tasks are left unattended. But when such tasks are taken up and completed after their deadlines, then the system is said to be an Under loaded system.From  \cite{185354}  there exists a schedule that will meet every task.
+ 
+\subsubsection{Aperiodic Tasks}
+Aperiodic in this context refers to tasks that have no idea of future instances, when scheduling. These tasks are assumed to be independent of each other and of the Offline scheduled tasks.They have the following characteristics, Time, Firm absolute deadline and Value. Most of this is unknown at design time, and aperiodic tasks can also be used to handle non-critical periodic activities. \cite{1199244}
+
+\subsubsection{Value}
+This is a measure of the benefit to the system associated
+with completing the task in time. Only aperiodic tasks are
+associated with values, since offline scheduled tasks are
+never considered for rejection when resolving overload situations. The values are considered to be cumulative, i.e., two
+sets of tasks can be compared by their respective sum of values. Tasks contribute with their value to the system if they
+finish in time, otherwise they do not contribute at all. In this
+paper we assume static values ranging from 1 to Max Value,
+where a higher value indicates a greater benefit.\cite{1199244}
+
+
+\subsubsection{Typical Scheduling Schemes}
+Based on the problems that arise due to overloads, Academic enthusiasts have come up with Algorithms whose main aim is to predict and handle these overloads and in \cite{buttazzo2011hard} it is divided into three main classes.
+\paragraph{Best Effort}
+In this category Algorithms have no prediction for overload. when a new task arrives, it is taken directly into the ready queue. Here system performance would be properly controlled through priority assignment,which takes task values into consideration.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=8.5cm]{Best effort.jpg}
+    \cite{buttazzo2011hard}
+    \caption{Best Effort}
+    \label{fig:reg-gen}
+\end{figure}
+\paragraph{With Acceptance}
+Here we deal with Algorithms that have an admission control, and a guarantee test is performed at every job activation. Every time there is an incoming task the schedulability of those set of tasks is verified based on worst-case assumptions, and this routine is almost always guaranteed. When a set of task are schedulable then it is accepted into the system. else it is rejected.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=8.5cm]{With Acceptance.jpg}
+    \cite{buttazzo2011hard}
+    \caption{With Acceptance}
+    \label{fig:reg-gen}
+\end{figure}
+
+\paragraph{Robust}
+This category includes those algorithms that separates sets of tasks by timing constraints and importance. In doing this two policies are considered one for task rejection and the other for task acceptance. With this category when a new task enters the system, the schedulability based worst-case assumption is verified. Once found schedulable it is accepted into a ready queue, else rejected.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=8.5cm]{Robust.jpg}
+    \cite{buttazzo2011hard}
+    \caption{Robust}
+    \label{fig:reg-gen}
+\end{figure}
+
+
+\subsection{Some important mathematical formulas}
+\subsubsection{Performance metrics}
+when tasks are activated dynamically an overload occurs.there are no algorithms that can guarantee a feasible schedule of set task Since one more tasks will miss their deadlines, it is preferable that late tasks be the less important ones in order to achieve graceful degradation.Distinguishing between time constraints and importance for a set of tasks is really very crucial for an overloaded system.For a system to emphasize importance, each task is associated to an additional parameter which its Value. This value is important with respect to value such that most times this value is set to computation time. And other times set to an arbitrary integer number or the ratio of an arbitrary number and the task computation time which can be referred to as Value  density as analysed by Buttazzo in \cite{buttazzo2011hard}. This value can be used by the system to make scheduling decisions. 
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=8.5cm]{Utility functions.png}
+    \cite{buttazzo2011hard}
+    \caption{Utility functions that can be associated to a task to describe its importance}
+    \label{fig:reg-gen}
+\end{figure}
+
+The graphs above describe Utility functions that can be associated to a task to describe its importance.In \cite{buttazzo2011hard} When the importance of a task set has been defined, then we can measure the performance of a scheduling algorithm by accumulating the values of a task utility functions computed at their completion time.B is defined as the cumulative value of a scheduling algorithm
+\begin{equation} \label{equ:elastic}
+    \Gamma_B = \sum_{i-1}^{n} v(f_i)
+\end{equation}
+
+Below are some analysis of maximum values in  \cite{buttazzo2011hard}
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=8.5cm]{Optimal Online.png}
+    \cite{buttazzo2011hard}
+    \caption{No optimal online Algorithm exist in overload conditions, since the schedule that maximizes $\Gamma$  depends  on  the knowledge  of  future  arrivals  $\Gamma_{max} = 10$  in case (a), $\Gamma_{max} = 12$ in case (b) and  $\Gamma_{max} = 16$ case (c).}
+    \label{fig:reg-gen}
+\end{figure}
+
+Furthermore a scheduling algorithm is said to be at its Optimum, when it is able to maximize the value achievable on a task set. 
+\subsubsection{Effective Value Density}
+\subsubsection{Competitive factor}
+The cumulative value obtained by a scheduling algorithm on a task set is a representation, of the measure of the performance for that particular task set. A parameter that measures the worst case performance of a scheduling algorithm is also known as the competitive factor, introduced by Baruah et al.\cite{185354}
+\paragraph{Definition}
+
+\section{Handling Overloads}
+\subsection{Overload Handling}
+\subsubsection{Problem Formulation}
+\subsection{Scheduling schemes with example Algorithms}
+\subsubsection{ROBUST Algorithm (Best Effort)}
+\subsubsection{D*over Algorithm(With Acceptance)}
+\subsubsection{RED Algorithm (Robust scheme)}
+\subsubsection{SMT Based Scheduling}
+\subsection{Performance Evaluation of Algorithms(Comparison)}
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=8.5cm]{Performance Evaluation.png}
+    \cite{buttazzo2011hard}
+    \caption{Performance of various EDF scheduling schemes: Best Effort(EDF), guaranteed (GED), and Robuat (RED)}
+    \label{fig:reg-gen}
+\end{figure}
+
+
+\section{Application of Handling Overloads in FTT-CAN Protocol}
+\subsection{FTT-Can Protocol}
+\subsection{Problem Formulation}
+\subsection{Overload management}
+\subsection{Schedulability analysis}
+In \cite{inproceedings} we can see here the author performs schedulability analysis of both periodic and aperiodic messages by exploiting time analysis on a cycle by cycle basis. This results in an iterative schedulability test, which can hardly be used at runtime. 
+\section{Conclusion}
+
+
+
+\bibliographystyle{IEEEtran}
+\bibliography{ref}
+
+
+
+\end{document}
